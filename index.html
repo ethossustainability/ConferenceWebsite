@@ -216,13 +216,14 @@
         ];
 
         function getRandomShape() {
-            const r = () => Math.floor(Math.random() * 40 + 30);
+            // Ensure values aren't too extreme (stay between 25% and 75%)
+            const r = () => Math.floor(Math.random() * 30 + 35);
             return `${r()}% ${100 - r()}% ${r()}% ${100 - r()}% / ${r()}% ${100 - r()}% ${r()}% ${100 - r()}%`;
         }
 
         for (let i = 1; i <= 39; i++) {
             const member = document.createElement('div');
-            member.className = 'bubble-item animate';
+            member.className = 'bubble-item';
 
             // Randomize blob aesthetics
             member.style.borderRadius = getRandomShape();

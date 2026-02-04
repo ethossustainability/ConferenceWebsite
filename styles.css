@@ -518,25 +518,32 @@ a {
     position: relative;
     cursor: pointer;
     transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    background: var(--color-tan-light);
+    background: var(--color-tan);
+    /* Darker than tan-light for better contrast */
     border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
     overflow: hidden;
-    border: 3px solid transparent;
-    box-shadow: 0 10px 20px rgba(81, 64, 51, 0.1);
-    animation: morph 8s ease-in-out infinite both alternate;
+    border: 1px solid rgba(81, 64, 51, 0.1);
+    box-shadow: 0 4px 10px rgba(81, 64, 51, 0.05);
+    animation: floating 6s ease-in-out infinite both alternate;
+    /* High-performance fallback */
+    /* Use morph-1 as default */
     display: flex;
     align-items: center;
     justify-content: center;
+    will-change: transform, border-radius;
+    /* Performance hint */
+    transform: translateZ(0);
+    /* Hardware acceleration */
 }
 
 .bubble-item:nth-child(2n) {
-    animation-duration: 9s;
-    animation-delay: -1s;
+    /* animation-duration: 9s; */
+    /* animation-delay: -1s; */
 }
 
 .bubble-item:nth-child(3n) {
-    animation-duration: 7s;
-    animation-delay: -2.5s;
+    /* animation-duration: 7s; */
+    /* animation-delay: -2.5s; */
 }
 
 .bubble-item:hover {
@@ -544,7 +551,23 @@ a {
     border-color: var(--color-peach);
     box-shadow: 0 20px 40px rgba(81, 64, 51, 0.2);
     z-index: 10;
-    border-radius: 50%;
+    border-radius: 50% !important;
+    /* Forces symmetry on hover for clarity */
+    animation-name: morph-1;
+    /* Morph only on interaction */
+    animation-duration: 4s;
+}
+
+.bubble-item:nth-child(2n):hover {
+    animation-name: morph-2;
+}
+
+.bubble-item:nth-child(3n):hover {
+    animation-name: morph-3;
+}
+
+.bubble-item:nth-child(4n):hover {
+    animation-name: morph-4;
 }
 
 .bubble-img-placeholder {
@@ -553,13 +576,18 @@ a {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--color-tan-light);
+    background-color: var(--color-tan);
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--color-brown-dark);
     transition: var(--transition);
     z-index: 1;
+}
+
+.bubble-img-placeholder svg {
+    opacity: 0.6;
+    /* Increased visibility */
 }
 
 .bubble-item:hover .bubble-img-placeholder {
@@ -605,6 +633,24 @@ a {
     margin-top: 4px;
     display: block;
     line-height: 1;
+}
+
+@keyframes floating {
+    0% {
+        transform: translateZ(0) translateY(0) rotate(0deg);
+    }
+
+    33% {
+        transform: translateZ(0) translateY(-8px) rotate(1deg);
+    }
+
+    66% {
+        transform: translateZ(0) translateY(4px) rotate(-1deg);
+    }
+
+    100% {
+        transform: translateZ(0) translateY(0) rotate(0deg);
+    }
 }
 
 @keyframes morph-1 {
