@@ -213,6 +213,8 @@ a {
     border: 1px solid var(--border);
     text-align: center;
     transition: var(--transition);
+    display: flex;
+    flex-direction: column;
 }
 
 .selection-card:hover {
@@ -229,6 +231,8 @@ a {
 .selection-card p {
     color: var(--text-muted);
     margin-bottom: 2rem;
+    flex-grow: 1;
+    /* Pushes the button to the bottom */
 }
 
 /* --- About Section --- */
@@ -336,9 +340,7 @@ a {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -515,31 +517,40 @@ a {
     height: 140px;
     position: relative;
     cursor: pointer;
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     background: var(--color-tan-light);
-    border-radius: 50%;
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
     overflow: hidden;
     border: 3px solid transparent;
     box-shadow: 0 10px 20px rgba(81, 64, 51, 0.1);
-    animation: float 6s ease-in-out infinite;
+    animation: morph 8s ease-in-out infinite both alternate;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .bubble-item:nth-child(2n) {
+    animation-duration: 9s;
     animation-delay: -1s;
 }
 
 .bubble-item:nth-child(3n) {
+    animation-duration: 7s;
     animation-delay: -2.5s;
 }
 
 .bubble-item:hover {
-    transform: scale(1.15) translateY(-10px);
+    transform: scale(1.25) rotate(2deg);
     border-color: var(--color-peach);
-    box-shadow: 0 15px 30px rgba(81, 64, 51, 0.2);
+    box-shadow: 0 20px 40px rgba(81, 64, 51, 0.2);
     z-index: 10;
+    border-radius: 50%;
 }
 
 .bubble-img-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     background-color: var(--color-tan-light);
@@ -548,56 +559,99 @@ a {
     justify-content: center;
     color: var(--color-brown-dark);
     transition: var(--transition);
+    z-index: 1;
 }
 
 .bubble-item:hover .bubble-img-placeholder {
     background-color: var(--color-peach-light);
-    color: var(--color-brown-dark);
-}
-
-.bubble-img-placeholder svg {
-    opacity: 0.4;
-    transition: var(--transition);
-}
-
-.bubble-item:hover .bubble-img-placeholder svg {
-    opacity: 0.8;
+    opacity: 0.15;
 }
 
 .bubble-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(81, 64, 51, 0.85);
-    color: white;
-    padding: 10px 5px;
+    position: relative;
+    z-index: 2;
+    color: var(--color-dark);
     text-align: center;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     opacity: 0;
-    transform: translateY(100%);
+    transform: scale(0.8);
     transition: var(--transition);
 }
 
 .bubble-item:hover .bubble-content {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
 }
 
 .bubble-content h4 {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     margin: 0;
-    font-weight: 600;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.1;
 }
 
-@keyframes float {
+.bubble-content .role-highlight {
+    font-size: 0.8rem;
+    color: var(--color-brown-dark);
+    font-weight: 800;
+    margin-top: 4px;
+    display: block;
+    line-height: 1;
+}
+
+@keyframes morph-1 {
 
     0%,
     100% {
-        transform: translateY(0);
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
     }
 
     50% {
-        transform: translateY(-15px);
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+}
+
+@keyframes morph-2 {
+
+    0%,
+    100% {
+        border-radius: 40% 60% 60% 40% / 40% 40% 60% 60%;
+    }
+
+    50% {
+        border-radius: 60% 40% 40% 60% / 60% 60% 40% 40%;
+    }
+}
+
+@keyframes morph-3 {
+
+    0%,
+    100% {
+        border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%;
+    }
+
+    50% {
+        border-radius: 50% 50% 70% 30% / 70% 70% 30% 30%;
+    }
+}
+
+@keyframes morph-4 {
+
+    0%,
+    100% {
+        border-radius: 50% 50% 50% 50% / 80% 20% 80% 20%;
+    }
+
+    50% {
+        border-radius: 80% 20% 80% 20% / 50% 50% 50% 50%;
     }
 }
 

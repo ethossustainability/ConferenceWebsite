@@ -209,21 +209,46 @@
     <script>
         // Populate Team Members
         const teamGrid = document.getElementById('bubble-grid');
+        const highRoles = [
+            { name: 'Dr. John Doe', role: 'Executive Director' },
+            { name: 'Jane Smith', role: 'Lead Organizer' },
+            { name: 'Michael Chen', role: 'Technical Director' }
+        ];
+
+        function getRandomShape() {
+            const r = () => Math.floor(Math.random() * 40 + 30);
+            return `${r()}% ${100 - r()}% ${r()}% ${100 - r()}% / ${r()}% ${100 - r()}% ${r()}% ${100 - r()}%`;
+        }
+
         for (let i = 1; i <= 39; i++) {
             const member = document.createElement('div');
             member.className = 'bubble-item animate';
-            member.style.animationDelay = `${(i % 10) * 0.15}s`;
-            const name = `Member ${i}`;
-            const role = 'Team Member';
+
+            // Randomize blob aesthetics
+            member.style.borderRadius = getRandomShape();
+            member.style.animationName = `morph-${Math.floor(Math.random() * 4) + 1}`;
+            member.style.animationDuration = `${Math.random() * 4 + 6}s`;
+            member.style.animationDelay = `${Math.random() * -10}s`;
+
+            let name, role;
+            if (i <= highRoles.length) {
+                name = highRoles[i - 1].name;
+                role = highRoles[i - 1].role;
+            } else {
+                name = `Team Member ${i}`;
+                role = 'Contributor';
+            }
+
             const bio = 'This team member is dedicated to advancing sustainability through innovation and collaboration. They bring unique expertise to The Circular Economy: From Youth to Industry conference.';
 
             member.onclick = () => showDetail(name, role, bio, 'team');
             member.innerHTML = `
                 <div class="bubble-img-placeholder">
-                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                 </div>
                 <div class="bubble-content">
                     <h4>${name}</h4>
+                    <span class="role-highlight">${role}</span>
                 </div>
             `;
             teamGrid.appendChild(member);
