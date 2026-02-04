@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pitch Room Application - Sustainable Conference</title>
+    <title>Pitch Room Application - The Circular Economy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -26,7 +26,14 @@
 <body>
     <nav class="navbar">
         <div class="container nav-content">
-            <a href="index.html" class="logo">Ethos Sustainability</a>
+            <a href="index.html" class="logo-container">
+                <img src="EthosLogoInsignia.png" alt="Ethos Insignia" class="nav-insignia">
+                <span class="logo">Ethos Sustainability</span>
+            </a>
+            <div class="nav-actions">
+                <a href="register-student.html" class="btn btn-outline btn-nav">Register as Student</a>
+                <a href="register-booth.html" class="btn btn-primary btn-nav">Register Your Company</a>
+            </div>
         </div>
     </nav>
 
@@ -38,8 +45,28 @@
             </div>
         </section>
 
+        <section class="container"
+            style="padding-bottom: 2rem; display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+            <a href="General_Rules.pdf" target="_blank" class="btn btn-outline animate delay-2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;">
+                    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                </svg>
+                General Rules
+            </a>
+            <a href="PitchRoom_Rules.pdf" target="_blank" class="btn btn-outline animate delay-2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;">
+                    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                </svg>
+                Project Rules
+            </a>
+        </section>
+
         <section class="container" style="padding-bottom: 6rem;">
-            <div class="form-container animate delay-2">
+            <div class="form-container animate delay-3">
                 <!-- Google Form Embed Placeholder -->
                 <div class="form-placeholder">
                     <p>Pitch Room Application Google Form (Coming Soon)</p>
@@ -50,7 +77,7 @@
 
     <footer class="footer">
         <div class="container">
-            <div class="footer-brand">Ethos Sustainability</div>
+            <div class="footer-brand">The Circular Economy: From Youth to Industry</div>
             <p class="footer-text">© 2026 Ethos Sustainable Business and STEAM Education</p>
         </div>
     </footer>
