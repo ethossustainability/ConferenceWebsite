@@ -585,6 +585,18 @@ a {
     z-index: 1;
 }
 
+.bubble-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    transition: var(--transition);
+    opacity: 0.8;
+}
+
 .bubble-img-placeholder svg {
     opacity: 0.6;
     /* Increased visibility */
@@ -593,6 +605,11 @@ a {
 .bubble-item:hover .bubble-img-placeholder {
     background-color: var(--color-peach-light);
     opacity: 0.15;
+}
+
+.bubble-item:hover .bubble-img {
+    transform: scale(1.1);
+    opacity: 0.4;
 }
 
 .bubble-content {
