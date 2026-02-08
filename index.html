@@ -364,17 +364,17 @@
             {
                 name: 'Ms. Jennifer English',
                 role: 'Panelist',
-                image: null,
+                image: "SpeakerPhotos/JenniferEnglish.jpg",
                 objectPosition: '50% 50%',
                 bio: 'High school educator bringing the perspective of sustainability education at the secondary school level.'
             },
-            {
-                name: 'George Cummings',
-                role: 'Panelist',
-                image: "SpeakerPhotos/GeorgeCummings.jpg",
-                objectPosition: '50% 50%',
-                bio: 'Expert in water systems and environmental management, focusing on sustainable practices for aquatic ecosystems.'
-            },
+            // {
+            //     name: 'George Cummings',
+            //     role: 'Panelist',
+            //     image: "SpeakerPhotos/GeorgeCummings.jpg",
+            //     objectPosition: '50% 50%',
+            //     bio: 'Expert in water systems and environmental management, focusing on sustainable practices for aquatic ecosystems.'
+            // },
             {
                 name: 'Dr. Behnaz Balmaki',
                 role: 'Panelist',
@@ -444,6 +444,41 @@
         // Populate twice for infinite marquee
         createBubbles(speakerCarousel);
         createBubbles(speakerCarousel);
+
+        // 3D curving effect logic
+        const marquee = document.querySelector('.speaker-marquee');
+        const items = speakerCarousel.getElementsByClassName('bubble-item');
+
+        function update3D() {
+            const marqueeRect = marquee.getBoundingClientRect();
+            const center = marqueeRect.left + marqueeRect.width / 2;
+            const maxDistance = marqueeRect.width / 2;
+
+            for (let item of items) {
+                const rect = item.getBoundingClientRect();
+                const itemCenter = rect.left + rect.width / 2;
+                const distance = itemCenter - center;
+                const normDistance = Math.min(Math.abs(distance) / maxDistance, 1);
+
+                // Calculate transforms
+                const scale = 1 - (normDistance * 0.55); // Shrink towards edges
+                const translateZ = (1 - normDistance) * 150; // Pop forward in center
+                const rotateY = (distance / maxDistance) * -25; // Tilt away from center
+                const opacity = 1 - (normDistance * 0.2); // Slight fade at edges
+
+                // Apply transforms
+                // Note: We use !important or just direct style as we are overriding the floating animation partially
+                // Actually, the floating animation is on the item itself. We can combine them or apply to inner content.
+                // Let's apply to the item itself.
+                item.style.transform = `scale(${scale}) translateZ(${translateZ}px) rotateY(${rotateY}deg)`;
+                item.style.opacity = opacity;
+            }
+
+            requestAnimationFrame(update3D);
+        }
+
+        // Start the loop
+        requestAnimationFrame(update3D);
 
 
         // Modal Functions

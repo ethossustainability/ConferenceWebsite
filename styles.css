@@ -813,17 +813,24 @@ a {
 .speaker-marquee {
     position: relative;
     width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
     overflow: hidden;
-    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 25%, black 75%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 25%, black 75%, transparent);
+    padding: 1rem 0;
+    perspective: 1200px;
+    perspective-origin: center center;
 }
 
 .speaker-carousel {
     display: flex;
-    gap: 2rem;
+    gap: 3rem;
+    /* Increased gap for circular look */
     width: max-content;
     padding: 3rem 0;
     animation: speaker-scroll 40s linear infinite;
+    transform-style: preserve-3d;
 }
 
 @keyframes speaker-scroll {
@@ -832,7 +839,7 @@ a {
     }
 
     100% {
-        transform: translateX(calc(-50% - 1rem));
+        transform: translateX(calc(-50% - 1.5rem));
     }
 }
 
