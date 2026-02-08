@@ -536,16 +536,6 @@ a {
     /* Hardware acceleration */
 }
 
-.bubble-item:nth-child(2n) {
-    /* animation-duration: 9s; */
-    /* animation-delay: -1s; */
-}
-
-.bubble-item:nth-child(3n) {
-    /* animation-duration: 7s; */
-    /* animation-delay: -2.5s; */
-}
-
 .bubble-item:hover {
     transform: scale(1.25) rotate(2deg);
     border-color: var(--color-peach);
@@ -801,6 +791,49 @@ a {
 .modal-info p {
     color: var(--color-brown-dark);
     font-size: 1.1rem;
+}
+
+/* --- Speakers Section --- */
+.speakers-section {
+    padding: var(--section-padding);
+    background: white;
+}
+
+.speakers-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.speakers-header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+}
+
+.speaker-marquee {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.speaker-carousel {
+    display: flex;
+    gap: 2rem;
+    width: max-content;
+    padding: 3rem 0;
+    animation: speaker-scroll 40s linear infinite;
+}
+
+@keyframes speaker-scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-50% - 1rem));
+    }
 }
 
 @media (max-width: 768px) {

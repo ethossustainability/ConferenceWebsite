@@ -169,10 +169,26 @@
                 </div>
             </div>
         </section>
+
+        <section id="speakers" class="speakers-section animate delay-3">
+            <div class="container">
+                <div class="speakers-header">
+                    <h2 class="section-title">Conference Speakers</h2>
+                    <p>Hear from industry leaders and sustainability experts.</p>
+                </div>
+
+                <div class="speaker-marquee">
+                    <div class="speaker-carousel" id="speaker-carousel">
+                        <!-- Populated via script -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="team-section" id="team">
             <div class="container">
                 <div class="team-header animate">
-                    <h2>Meet Our Team</h2>
+                    <h2>Meet Our Coordinators</h2>
                     <p>A diverse group of innovators committed to a sustainable future.</p>
                 </div>
                 <!-- Interactive Bubble Grid -->
@@ -216,7 +232,7 @@
                 role: 'Executive Director',
                 image: 'TeamPhotos/Gopalakrishnan.jpg',
                 objectPosition: '50% 50%',
-                bio: 'Executive Director of Ethos Sustainability. This team member is dedicated to advancing sustainability through innovation and collaboration.'
+                bio: 'Student researcher and technology-focused entrepreneur studying at the Texas Academy of Mathematics and Science (TAMS). His work centers on energy systems, sustainable materials, and applied chemical engineering. He leads multiple hands-on innovation efforts, including hydrogel product development and solar engineering projects, managing small research and engineering teams to move ideas from early experimentation to functional models. Deeply committed to sustainability, clean energy, and technical leadership.'
             },
             {
                 name: 'Shriya Deoli',
@@ -224,13 +240,6 @@
                 image: 'TeamPhotos/Deoli.jpg',
                 objectPosition: '50% 50%',
                 bio: 'Shriya Deoli is the VP of the board, business advisor, and administrative assistant at Ethos sustainability, where she helps develop workshops and other projects to educate students in sustainability and business.'
-            },
-            {
-                name: 'Arabella Glass',
-                role: 'STEM Department Head',
-                image: 'TeamPhotos/Glass.jpg',
-                objectPosition: '80% 50%',
-                bio: 'A high school senior at Waterford Kettering High school in Waterford, Michigan. She loves spending time outside, and participates on multiple different sports teams and clubs. Her goal is to one day open up her own wildlife sanctuary.'
             },
             {
                 name: 'Gregory Daley',
@@ -326,6 +335,116 @@
             `;
             teamGrid.appendChild(member);
         }
+
+        // Populate Speakers Carousel
+        const speakerCarousel = document.getElementById('speaker-carousel');
+
+        const speakers = [
+            {
+                name: 'Mr. Prasad Jaladi',
+                role: 'Keynote Speaker',
+                image: "SpeakerPhotos/PrasadJaladi.jpg",
+                objectPosition: '50% 50%',
+                bio: 'Nonprofit leader at Suraksha, specializing in circular economy principles and philosophy in sustainability. Keynote speaker for the Progress in Sustainability Luncheon.'
+            },
+            {
+                name: 'Dr. Kelly Albus',
+                role: 'Panelist',
+                image: "SpeakerPhotos/KellyAlbus.jpg",
+                objectPosition: '50% 50%',
+                bio: 'Professor at Texas Woman\'s University specializing in applied sustainability and circular economy practices.'
+            },
+            {
+                name: 'Dr. Keller',
+                role: 'Panelist',
+                image: "SpeakerPhotos/HarrisonKeller.jpg",
+                objectPosition: '50% 20%',
+                bio: 'Expert in university-level sustainable education, focusing on integrating sustainability into higher education curricula.'
+            },
+            {
+                name: 'Ms. Jennifer English',
+                role: 'Panelist',
+                image: null,
+                objectPosition: '50% 50%',
+                bio: 'High school educator bringing the perspective of sustainability education at the secondary school level.'
+            },
+            {
+                name: 'George Cummings',
+                role: 'Panelist',
+                image: "SpeakerPhotos/GeorgeCummings.jpg",
+                objectPosition: '50% 50%',
+                bio: 'Expert in water systems and environmental management, focusing on sustainable practices for aquatic ecosystems.'
+            },
+            {
+                name: 'Dr. Behnaz Balmaki',
+                role: 'Panelist',
+                image: "SpeakerPhotos/BehnazBalmaki.jpg",
+                objectPosition: '50% 50%',
+                bio: 'Professor at Texas Woman\'s University specializing in environmental science and urban sustainability.'
+            },
+            {
+                name: 'Dr. Thomas Cundari',
+                role: 'Panelist',
+                image: "SpeakerPhotos/ThomasCundari.jpg",
+                objectPosition: '50% 50%',
+                bio: 'Expert in sustainable chemistry and education, advancing green chemistry principles and sustainable practices in chemical sciences.'
+            },
+            {
+                name: 'Dr. Lehman Marks',
+                role: 'Panelist',
+                image: "SpeakerPhotos/LehmanMarks.jpg",
+                objectPosition: '50% 20%',
+                bio: 'Founder and CEO of Solar Car Challenge, promoting innovation in sustainable transportation and renewable energy education.'
+            }
+        ];
+
+        // Build bubbles (Two sets for infinite loop)
+        const createBubbles = (container) => {
+            speakers.forEach(speaker => {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble-item';
+
+                // Random blob animation
+                bubble.style.borderRadius = getRandomShape();
+                bubble.style.animationName = `morph-${Math.floor(Math.random() * 4) + 1}`;
+                bubble.style.animationDuration = `${Math.random() * 4 + 6}s`;
+                bubble.style.animationDelay = `${Math.random() * -10}s`;
+                bubble.style.flexShrink = '0';
+
+                const { name, role, bio, image, objectPosition } = speaker;
+
+                bubble.onclick = () =>
+                    showDetail(name, role, bio, 'speaker', image, objectPosition);
+
+                const imgHTML = image
+                    ? `<img src="${image}" alt="${name}" class="bubble-img" style="object-position:${objectPosition}">`
+                    : '';
+
+                bubble.innerHTML = `
+            <div class="bubble-img-placeholder">
+                ${imgHTML}
+                <svg width="50" height="50" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round"
+                    style="${image ? 'display:none' : ''}">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </div>
+            <div class="bubble-content">
+                <h4>${name}</h4>
+                <span class="role-highlight">${role}</span>
+            </div>
+        `;
+
+                container.appendChild(bubble);
+            });
+        };
+
+        // Populate twice for infinite marquee
+        createBubbles(speakerCarousel);
+        createBubbles(speakerCarousel);
+
 
         // Modal Functions
         function showDetail(title, subtitle, description, type = 'sponsor', image = null, objectPosition = '50% 50%') {
