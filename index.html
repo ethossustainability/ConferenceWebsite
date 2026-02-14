@@ -242,6 +242,28 @@
                 bio: 'Shriya Deoli is the VP of the board, business advisor, and administrative assistant at Ethos sustainability, where she helps develop workshops and other projects to educate students in sustainability and business.'
             },
             {
+                name: 'Mico Hastings',
+                role: 'Financial Director & Treasurer',
+                image: 'TeamPhotos/Hastings.jpg',
+                objectPosition: '50% 50%',
+                bio: 'His work with Ethos Sustainability primarly centers around the management of finances and data within the organization, collaborating with the Board to determine budgeting plans and to facilitate assets.'
+            },
+            {
+                name: 'Juhi Lohiya',
+                role: 'Operations Director',
+                image: 'TeamPhotos/Lohiya.jpg',
+                objectPosition: '50% 25%',
+                bio: 'Juhi manages internal operations at ethos sustainability and is someone who passionately wants to make a positive impact on the environment as well as people!'
+            },
+            {
+                name: 'Nia Abrams',
+                role: 'Conference Coordinator',
+                image: 'TeamPhotos/Abrams.jpg',
+                objectPosition: '40% -10%',
+                bio: 'Conference Coordinator for Ethos Sustainability\'s Sustainability and Circular Economy Conference: From Youth to Industry',
+                zoom: 3.5
+            },
+            {
                 name: 'Gregory Daley',
                 role: 'Head of Projects Department',
                 image: 'TeamPhotos/Daley.png',
@@ -291,7 +313,7 @@
             return `${r()}% ${100 - r()}% ${r()}% ${100 - r()}% / ${r()}% ${100 - r()}% ${r()}% ${100 - r()}%`;
         }
 
-        for (let i = 0; i < 24; i++) {
+        for (let i = 0; i < teamMembers.length; i++) {
             const member = document.createElement('div');
             member.className = 'bubble-item';
 
@@ -301,26 +323,15 @@
             member.style.animationDuration = `${Math.random() * 4 + 6}s`;
             member.style.animationDelay = `${Math.random() * -10}s`;
 
-            let name, role, bio, image, objectPosition;
-            if (i < teamMembers.length) {
-                name = teamMembers[i].name;
-                role = teamMembers[i].role;
-                bio = teamMembers[i].bio;
-                image = teamMembers[i].image;
-                objectPosition = teamMembers[i].objectPosition || '50% 50%';
-            } else {
-                name = `Team Member ${i + 1}`;
-                role = 'Contributor';
-                bio = 'This team member is dedicated to advancing sustainability through innovation and collaboration. They bring unique expertise to The Circular Economy: From Youth to Industry conference.';
-                image = null;
-                objectPosition = '50% 50%';
-            }
+            const { name, role, bio, image, objectPosition, zoom } = teamMembers[i];
+            const finalObjectPosition = objectPosition || '50% 50%';
+            const finalZoom = zoom || 1;
 
-            member.onclick = () => showDetail(name, role, bio, 'team', image, objectPosition);
+            member.onclick = () => showDetail(name, role, bio, 'team', image, finalObjectPosition, finalZoom);
 
             let imgContent = '';
             if (image) {
-                imgContent = `<img src="${image}" alt="${name}" class="bubble-img" style="object-position: ${objectPosition}">`;
+                imgContent = `<img src="${image}" alt="${name}" class="bubble-img" style="object-position: ${finalObjectPosition}; --zoom: ${finalZoom}">`;
             }
 
             member.innerHTML = `
@@ -414,7 +425,7 @@
                 const { name, role, bio, image, objectPosition } = speaker;
 
                 bubble.onclick = () =>
-                    showDetail(name, role, bio, 'speaker', image, objectPosition);
+                    showDetail(name, role, bio, 'speaker', image, objectPosition, speaker.zoom || 1);
 
                 const imgHTML = image
                     ? `<img src="${image}" alt="${name}" class="bubble-img" style="object-position:${objectPosition}">`
@@ -482,14 +493,14 @@
 
 
         // Modal Functions
-        function showDetail(title, subtitle, description, type = 'sponsor', image = null, objectPosition = '50% 50%') {
+        function showDetail(title, subtitle, description, type = 'sponsor', image = null, objectPosition = '50% 50%', zoom = 1) {
             document.getElementById('modal-title').innerText = title;
             document.getElementById('modal-subtitle').innerText = subtitle;
             document.getElementById('modal-description').innerText = description;
 
             const iconContainer = document.getElementById('modal-icon');
             if (image) {
-                iconContainer.innerHTML = `<div class="modal-img"><img src="${image}" alt="${title}" style="object-position: ${objectPosition}"></div>`;
+                iconContainer.innerHTML = `<div class="modal-img"><img src="${image}" alt="${title}" style="object-position: ${objectPosition}; transform: scale(${zoom})"></div>`;
                 // Remove placeholder styling if needed or rely on modal-img class
                 iconContainer.className = '';
             } else if (type === 'team') {
