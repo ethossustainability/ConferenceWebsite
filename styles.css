@@ -543,6 +543,33 @@ a {
     color: var(--color-dark);
 }
 
+.team-subcategory {
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.team-subcategory h3 {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+    color: var(--color-brown-dark);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    display: inline-block;
+}
+
+.team-subcategory h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 3px;
+    background: var(--color-peach);
+    border-radius: 2px;
+}
+
 .bubble-grid {
     display: flex;
     flex-wrap: wrap;

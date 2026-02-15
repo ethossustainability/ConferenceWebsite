@@ -188,12 +188,24 @@
         <section class="team-section" id="team">
             <div class="container">
                 <div class="team-header animate">
-                    <h2>Meet Our Coordinators</h2>
+                    <h2>Meet the Team</h2>
                     <p>A diverse group of innovators committed to a sustainable future.</p>
                 </div>
-                <!-- Interactive Bubble Grid -->
-                <div class="bubble-grid" id="bubble-grid">
-                    <!-- Populated via script -->
+
+                <!-- Board Members Section -->
+                <div class="team-subcategory animate">
+                    <h3>Board Members</h3>
+                    <div class="bubble-grid" id="board-grid">
+                        <!-- Populated via script -->
+                    </div>
+                </div>
+
+                <!-- Team Leads and Coordinators Section -->
+                <div class="team-subcategory animate" style="margin-top: 6rem;">
+                    <h3>Team Leads & Coordinators</h3>
+                    <div class="bubble-grid" id="coordinators-grid">
+                        <!-- Populated via script -->
+                    </div>
                 </div>
             </div>
         </section>
@@ -225,7 +237,9 @@
     <script>
         // Populate Team Members
 
-        const teamGrid = document.getElementById('bubble-grid');
+        const boardGrid = document.getElementById('board-grid');
+        const coordinatorsGrid = document.getElementById('coordinators-grid');
+
         const teamMembers = [
             {
                 name: 'Prahaladh Gopalakrishnan',
@@ -344,8 +358,15 @@
                     <span class="role-highlight">${role}</span>
                 </div>
             `;
-            teamGrid.appendChild(member);
+
+            // First 4 are board members
+            if (i < 4) {
+                boardGrid.appendChild(member);
+            } else {
+                coordinatorsGrid.appendChild(member);
+            }
         }
+
 
         // Populate Speakers Carousel
         const speakerCarousel = document.getElementById('speaker-carousel');
