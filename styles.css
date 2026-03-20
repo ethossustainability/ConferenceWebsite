@@ -22,7 +22,11 @@
     --container-max: 1200px;
     --section-padding: 5rem 1rem;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --shadow: 0 10px 30px rgba(65, 52, 41, 0.08);
+        --shadow: 0 10px 30px rgba(65, 52, 41, 0.08);
+        /* Team photo background for transparent images */
+        --team-photo-bg: var(--color-brown-light);
+        /* Vertical gradient for team section (top: dark → bottom: light) */
+        --team-gradient: linear-gradient(180deg, var(--color-brown-dark) 0%, var(--color-brown-light) 100%);
 }
 
 * {
@@ -540,7 +544,7 @@ a {
 .team-header h2 {
     font-size: 3rem;
     margin-bottom: 1rem;
-    color: var(--color-dark);
+    color: var(--color-cream);
 }
 
 .team-subcategory {
@@ -551,11 +555,16 @@ a {
 .team-subcategory h3 {
     font-size: 1.75rem;
     margin-bottom: 2rem;
-    color: var(--color-brown-dark);
+    color: var(--color-cream);
     text-transform: uppercase;
     letter-spacing: 2px;
     position: relative;
     display: inline-block;
+}
+
+.team-header p {
+    color: var(--color-cream);
+    opacity: 0.95;
 }
 
 .team-subcategory h3::after {
@@ -634,11 +643,11 @@ a {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--color-tan);
+    background: linear-gradient(to top, var(--color-brown-dark) 0%, var(--color-brown-light) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-brown-dark);
+    color: var(--color-cream);
     transition: var(--transition);
     z-index: 1;
 }
